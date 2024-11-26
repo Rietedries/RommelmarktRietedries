@@ -15,7 +15,6 @@
     <script src="script.js"></script>
 </head>
 <body>
-
 <header>
     <h1>Rommelmarkt & Garageverkoop <br>Rietedries Wondelgem</h1>
 </header>
@@ -48,10 +47,10 @@
 
 <!-- Inschrijfformulier dat verborgen is tot de knop wordt ingedrukt -->
 <div class="container" id="inschrijvingsformuliercontainer">
-    <div class="signup-form" id="signupForm"> <!-- Correcte ID toegevoegd -->
+    <div class="signup-form" id="signupForm">
         <h2>Inschrijvingsformulier</h2>
         <span><strong>Let Op!</strong> Bent u een wijkbewoner? Stuur dan uw <strong>naam & voornaam</strong> naar <strong><a href="mailto:veronique.holderbeke@gmail.com">veronique.holderbeke@gmail.com</a></strong>.</span>
-        <form id="signupFormElement" onsubmit="event.preventDefault(); sendMail();">
+        <form id="signupFormElement" action="https://script.google.com/macros/s/AKfycbzFUzpV7kFsD67CF3-9iwtoR6nPdJh46jSB3To2JLNrnRaF5ZDwi-gUMAipJe7e2SUw/exec" method="post"onsubmit="event.preventDefault(); sendMail();">
             <label for="firstname">Voornaam:</label>
             <input type="text" id="firstname" name="firstname" required>
 
@@ -70,19 +69,19 @@
     </div>
 </div>
 
-<!-- Kaart en locatie -->
-<div class="container">
-    <div class="map" id="map">
-        <h2>Locatie</h2>
-        <iframe src="https://www.google.com/maps/d/u/6/embed?mid=1WCSPx76TgkrwlcWrHqmBs3Hug8-wWnY&ehbc=2E312F" width="100%" height="480"></iframe>
-    </div>
-</div>
-
 <!-- Nieuwe container voor het succesbericht -->
 <div class="container" id="successMessage" style="display: none;">
     <div class="success-message">
         <h2>Bedankt voor je inschrijving!</h2>
         <p>U kreeg een email van ons met de vraag uw betaling in orde te brengen. Indien u geen email van ons heeft gekregen, contacteer ons dan op het emailadres: veronique.holderbeke@gmail.com</p>
+    </div>
+</div>
+
+<!-- Kaart en locatie -->
+<div class="container">
+    <div class="map" id="map">
+        <h2>Locatie</h2>
+        <iframe src="https://www.google.com/maps/d/u/6/embed?mid=1WCSPx76TgkrwlcWrHqmBs3Hug8-wWnY&ehbc=2E312F" width="100%" height="480"></iframe>
     </div>
 </div>
 
@@ -121,8 +120,8 @@
         <div>
             <span>Contacteer Ons</span>
             <ul class="contact-icons">
-               <li><a href="https://www.facebook.com/groups/RieteDriesWondelgem" target="_blank" title="Ga naar de Facebook-groep">Facebook</a></li>
-               <li><a href="mailto:veronique.holderbeke@gmail.com" title="Stuur een e-mail">e-mail</a></li>
+                <li><a href="https://www.facebook.com/groups/RieteDriesWondelgem" target="_blank" title="Ga naar de Facebook-groep">Facebook</a></li>
+                <li><a href="mailto:veronique.holderbeke@gmail.com" title="Stuur een e-mail">E-mail</a></li>
             </ul>
         </div>
         <div>

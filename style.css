@@ -38,6 +38,7 @@ footer {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        max-width: 800px;
 
         div {
             display: grid;

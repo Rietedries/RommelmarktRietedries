@@ -19,7 +19,35 @@ function sendMail() {
             alert("Er is iets misgegaan bij het versturen van je inschrijving. Probeer het later opnieuw.");
             console.error("EmailJS error: ", error);
         });
+        
+    pushSpreadcheet(params);
 }
+
+function pushSpreadcheet(params) {
+    // De URL van je Apps Script endpoint
+    var scriptURL = "https://script.google.com/macros/s/AKfycbzFUzpV7kFsD67CF3-9iwtoR6nPdJh46jSB3To2JLNrnRaF5ZDwi-gUMAipJe7e2SUw/exec";
+
+    // Maak een FormData object aan en voeg de parameters toe
+    var formData = new URLSearchParams();
+    formData.append("firstname", params.firstname);
+    formData.append("lastname", params.lastname);
+    formData.append("email", params.email);
+    formData.append("phone", params.phone);
+
+    // Gebruik fetch met 'no-cors' modus
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors" // Dit schakelt de CORS-beperkingen uit
+    })
+    .then(response => {
+        console.log("Data succesvol toegevoegd aan de spreadsheet.");
+    })
+    .catch(error => {
+        console.error("Er is een fout opgetreden bij het versturen van de gegevens:", error);
+    });
+}
+
 
 // Functie om het inschrijfformulier te tonen
 function showSignupForm() {
@@ -54,7 +82,7 @@ function checkSignupDate() {
     }
 }
 
-// Controleer de datum bij het laden van de pagina
+    // Controleer de datum bij het laden van de pagina
 window.onload = function() {
     checkSignupDate();
 };
