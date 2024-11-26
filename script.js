@@ -9,7 +9,7 @@ function sendMail() {
     };
 
     // Stuur de e-mail via de EmailJS API
-    emailjs.send("service_suawbds", "template_7bgkfgl", params)
+    emailjs.send("service_prxhdxf", "template_94jtjce", params)
         .then(function(response) {
             // Verberg het formulier en toon de succesboodschap
             hideSignupForm();
