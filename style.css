@@ -214,3 +214,95 @@ footer {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*CSS toegevoegd voor de envelop animatie*/
+/* Knopstijl */
+#submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; /* Vaste breedte */
+    height: 50px; /* Vaste hoogte */
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitButton:disabled {
+    cursor: not-allowed;
+    background-color: #d6d6d6;
+}
+
+/* GIF stijl */
+#envelopeGif {
+    max-height: 100%;
+}
+
+/* Bolletjes stijl */
+#loadingDots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Bounceanimatie */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Succesicoon */
+#successCheck {
+    max-height: 50%; /* Past binnen de knop */
+}
+
+/*Succesicoon animeren zodat het van links naar rechts 'geschreven wordt*/
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/*Succesicoon stijl*/
+#successCheck {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 0.5s ease-in-out forwards;
+}

@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rommelmarkt & Garageverkoop Rietedries</title>
+    <title>Rommelmarkt Rietedries - 10 mei 2025</title>
     <link rel="icon" href="./img/gettyimages-2094304497-612x612.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+
+    <meta property="og:title" content="Rommelmarkt & Garageverkoop Rietedries - 10 mei 2025" />
+    <meta property="og:description" content="Kom naar de Rommelmarkt en Garageverkoop op 10 mei 2025! Bekijk meer informatie en schrijf je in voor een staanplaats op onze website." />
+    <meta property="og:image" content="https://rietedries.github.io/RommelmarktRietedries/img/gettyimages-2094304497-612x612.png" />
+    <meta property="og:url" content="https://rietedries.github.io/RommelmarktRietedries/" />
+    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
@@ -15,6 +21,7 @@
     <script src="script.js"></script>
 </head>
 <body>
+
 <header>
     <h1>Rommelmarkt & Garageverkoop <br>Rietedries Wondelgem</h1>
 </header>
@@ -38,11 +45,19 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="about" id="about">
+        <h2>Over</h2>
+        <span>Voor de kinderen is er <strong>gratis</strong> schmink aanwezig en is de wijk voorzien van 2 speeltuinten. <br> 
+        Ook komt er een ijskar en een kraam met verschillende gebakjes.</span>
+    </div>
+</div>
+
 <!-- Nieuwe container die als knop fungeert -->
 <div class="container">
-    <div class="signup-button-container" id="signupButton" onclick="showSignupForm()">
+    <div class="signup-button-container" id="signupButton" onclick="prepareSignupForm()">
         <span>Inschrijven</span>
-    </div>
+    </div>    
 </div>
 
 <!-- Inschrijfformulier dat verborgen is tot de knop wordt ingedrukt -->
@@ -63,7 +78,17 @@
             <label for="phone">Telefoonnummer (optioneel):</label>
             <input type="text" id="phone" name="phone">
 
-            <button type="submit">Verstuur</button>
+            <button id="submitButton" type="submit">
+                <span>Verstuur</span>
+                <img id="envelopeGif" src="./img/ezgif-7-b5dee7f82e.gif" alt="Verstuur animatie" style="display: none;">
+                <div id="loadingDots" style="display: none;">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <img id="successCheck" src="./img/check-icon.png" alt="Succes" style="display: none;">
+            </button>
+            
             <button type="button" class="cancel-button" onclick="hideSignupForm()">Annuleren</button>
         </form>
     </div>
@@ -74,6 +99,25 @@
     <div class="success-message">
         <h2>Bedankt voor je inschrijving!</h2>
         <p>U kreeg een email van ons met de vraag uw betaling in orde te brengen. Indien u geen email van ons heeft gekregen, contacteer ons dan op het emailadres: veronique.holderbeke@gmail.com</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="share-event" id="shareEvent">
+        <h2>Deel dit evenement</h2>
+        <div class="contact-icons">
+            <!-- Facebook Share -->
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://rietedries.github.io/RommelmarktRietedries/" 
+                target="_blank" 
+                title="Deel op Facebook">
+                <img src="./img/facebook-icoon.png" alt="Facebook Share" class="contact-icon">
+            </a>
+            <!-- Email Share -->
+            <a href="mailto:?subject=Kom%20naar%20Rommelmarkt%20Rietedries!&body=Hallo,%0D%0A%0D%0AIk%20nodig%20je%20uit%20voor%20de%20Rommelmarkt%20en%20Garageverkoop%20Rietedries%20op%2010%20mei%202025.%0D%0A%0D%0ABekijk%20meer%20informatie%20hier:%20https://rietedries.github.io/RommelmarktRietedries/%0D%0A%0D%0AVriendelijke%20groeten,%0D%0A[Je%20Naam]"
+                title="Deel via e-mail">
+                <img src="./img/email-icoon.png" alt="Email Share" class="contact-icon">
+            </a>
+        </div>
     </div>
 </div>
 
@@ -120,8 +164,8 @@
         <div>
             <span>Contacteer Ons</span>
             <ul class="contact-icons">
-                <li><a href="https://www.facebook.com/groups/RieteDriesWondelgem" target="_blank" title="Ga naar de Facebook-groep">Facebook</a></li>
-                <li><a href="mailto:veronique.holderbeke@gmail.com" title="Stuur een e-mail">E-mail</a></li>
+               <li><a href="https://www.facebook.com/groups/RieteDriesWondelgem" target="_blank" title="Ga naar de Facebook-groep">Facebook</a></li>
+               <li><a href="mailto:veronique.holderbeke@gmail.com" title="Stuur een e-mail">E-mail</a></li>
             </ul>
         </div>
         <div>
