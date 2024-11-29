@@ -1,34 +1,19 @@
-// Functie om de gegevens van het formulier te versturen via EmailJS
+let isProcessing = false;
+
+
 function sendMail() {
+    isProcessing = true; // Markeer dat een proces bezig is
     const submitButton = document.getElementById("submitButton");
     const submitSpan = submitButton.querySelector("span");
-    const envelopeGif = document.getElementById("envelopeGif");
     const loadingDots = document.getElementById("loadingDots");
     const successCheck = document.getElementById("successCheck");
 
     // Reset knop en verberg elementen
     submitButton.disabled = true;
     submitSpan.style.display = "none";
-    envelopeGif.style.display = "block";
-
-    // Begin met de GIF-animatie (2 seconden)
-    setTimeout(() => {
-        envelopeGif.style.display = "none";
-        loadingDots.style.display = "flex";
-    }, 2000);
-
-    // Schakel naar de bolletjes-animatie (3 seconden)
-    setTimeout(() => {
-        loadingDots.style.display = "none";
-        successCheck.style.display = "block";
-    }, 5000);
-
-    // Toon succesbericht na alle animaties (7 seconden totaal)
-    setTimeout(() => {
-        resetButton();
-        hideSignupForm();
-        showSuccessMessage();
-    }, 7000);
+    
+    // Begin direct met de LoadingDots
+    loadingDots.style.display = "flex";
 
     // Verzenden van de gegevens met EmailJS en Google Sheets
     const params = {
@@ -38,12 +23,29 @@ function sendMail() {
         phone: document.getElementById("phone").value || "Niet opgegeven",
     };
 
-    emailjs.send("service_prxhdxf", "template_94jtjce", params)
+    emailjs
+    .send("service_prxhdxf", "template_94jtjce", params)
     .then(() => pushSpreadcheet(params))
+    .then(() => {
+        if (!isProcessing) return; // Stop als proces geannuleerd is
+        setTimeout(() => {
+            loadingDots.style.display = "none";
+            successCheck.style.display = "block";
+
+            setTimeout(() => {
+                resetButton();
+                hideSignupForm();
+                showSuccessMessage();
+                isProcessing = false; // Reset vlag
+            }, 2000); // Laat succescheck zien voor 2 seconden
+        }, 2000); // Duur van de bolletjes-animatie
+    })
     .catch((error) => {
-        alert("Er is iets misgegaan bij het versturen van je inschrijving. Probeer het later opnieuw.");
-        console.error("EmailJS error: ", error);
+        isProcessing = false; // Markeer dat proces is gestopt
+        console.log("Fout bij versturen of opslaan: ", error);
+        loadingDots.style.display = "none"; // Zorg dat loadingDots verdwijnt
         resetButton();
+        showMisluktMessage(); // Toon foutmelding
     });
 }
 
@@ -55,24 +57,25 @@ formData.append("lastname", params.lastname);
 formData.append("email", params.email);
 formData.append("phone", params.phone);
 
-fetch(scriptURL, {
+return fetch(scriptURL, {
     method: "POST",
     body: formData,
     mode: "no-cors",
-}).catch((error) => console.error("Fout bij toevoegen aan spreadsheet:", error));
+}).catch((error) => {
+    console.error("Fout bij toevoegen aan spreadsheet:", error);
+    throw error; // Gooi een fout, zodat de catch in sendMail wordt geactiveerd
+});
 }
 
-// Functie om de knop en formulier te resetten
 function resetButton() {
+isProcessing = false; // Stop proces expliciet
 const submitButton = document.getElementById("submitButton");
 const submitSpan = submitButton.querySelector("span");
-const envelopeGif = document.getElementById("envelopeGif");
 const loadingDots = document.getElementById("loadingDots");
 const successCheck = document.getElementById("successCheck");
 
 submitButton.disabled = false;
-submitSpan.style.display = "block";
-envelopeGif.style.display = "none";
+submitSpan.style.display = "inline";
 loadingDots.style.display = "none";
 successCheck.style.display = "none";
 }
@@ -80,31 +83,51 @@ successCheck.style.display = "none";
 // Functie om het formulier opnieuw in te stellen en de succesboodschap te verbergen
 function prepareSignupForm() {
 const formContainer = document.getElementById("inschrijvingsformuliercontainer");
-const successMessage = document.getElementById("successMessage");
+const Message = document.getElementById("Message");
 const signupForm = document.getElementById("signupFormElement");
 
 signupForm.reset(); // Reset formulier
 formContainer.style.display = "block"; // Toon formulier
-successMessage.style.display = "none"; // Verberg succesbericht
+Message.style.display = "none"; // Verberg bericht
 }
 
 // Functie om het succesbericht te tonen
 function showSuccessMessage() {
-const successMessage = document.getElementById("successMessage");
-successMessage.style.display = "block";
+const container = document.getElementById("Message");
+container.innerHTML = "";
+const Message = document.createElement("div");
+container.style.display = "block";
+Message.innerHTML = `
+    <div class="success-message">
+        <h2>Bedankt voor je inschrijving!</h2>
+        <p>U kreeg een email van ons met de vraag uw betaling in orde te brengen. Indien u geen email van ons heeft gekregen, contacteer ons dan op het emailadres: veronique.holderbeke@gmail.com</p>
+    </div>
+    `;
+container.appendChild(Message);
+
+}
+
+// Functie om de mislukte boodschap te tonen
+function showMisluktMessage() {
+const container = document.getElementById("Message");
+container.innerHTML = "";
+const Message = document.createElement("div");
+container.style.display = "block";
+Message.id = "failureMessage";
+Message.className = "failure-message";
+Message.innerHTML = `
+    <div>
+    <h2 class="Fail">Er is iets misgegaan!</h2>
+    <p>We konden je inschrijving niet voltooien. Controleer je gegevens en probeer het later opnieuw. </p>
+    </div>
+ `;
+container.appendChild(Message);
 }
 
 // Functie om het formulier te verbergen
 function hideSignupForm() {
 const formContainer = document.getElementById("inschrijvingsformuliercontainer");
 formContainer.style.display = "none";
-}
-
-
-// Functie om het succesbericht te tonen
-function showSuccessMessage() {
-const successMessage = document.getElementById("successMessage");
-successMessage.style.display = "block";
 }
 
 // Controleer deadline voor inschrijving
@@ -114,10 +137,10 @@ const today = new Date();
 const signupButton = document.getElementById("signupButton");
 
 if (today > deadline) {
-    signupButton.classList.add("disabled");
-    signupButton.onclick = function () {
-        alert("De inschrijvingen zijn gesloten.");
-    };
+signupButton.classList.add("disabled");
+signupButton.onclick = function () {
+    alert("De inschrijvingen zijn gesloten.");
+};
 }
 }
 
@@ -131,26 +154,27 @@ checkSignupDate();
 // Functie om de foto's te tonen
 function showPhotos(year) {
 const photos = {
-    2024: [
-        './img/2024/Schmink052024.jpg',
-        './img/2024/Schmink052024_2.jpg',
-        './img/2024/Kraam052024.jpg'
-    ]
+2024: [
+    './img/2024/Schmink052024.jpg',
+    './img/2024/Schmink052024_2.jpg',
+    './img/2024/Kraam052024.jpg'
+]
 };
 
 const PhotoGallery = document.getElementById('PhotoGallery');
+PhotoGallery.style.display = "grid";
 
 PhotoGallery.innerHTML = '';
 
 if (photos[year]) {
-    photos[year].forEach(photo => {
-        const img = document.createElement('img');
-        img.src = photo;
-        img.alt = 'Foto van de schminkworkshop';
-        PhotoGallery.appendChild(img);
-    });
+photos[year].forEach(photo => {
+    const img = document.createElement('img');
+    img.src = photo;
+    img.alt = 'Foto van de schminkworkshop';
+    PhotoGallery.appendChild(img);
+});
 } else {
-    PhotoGallery.innerHTML = `<span>Nog geen foto's beschikbaar voor ${year}.</span>`;
+PhotoGallery.innerHTML = `<span>Nog geen foto's beschikbaar voor ${year}.</span>`;
 }
 }
 
@@ -158,15 +182,15 @@ if (photos[year]) {
 // Web Share API voor moderne browsers
 document.getElementById("shareButton").addEventListener("click", function () {
 if (navigator.share) {
-    navigator.share({
-        title: "Rommelmarkt & Garageverkoop Rietedries",
-        text: "Kom ook naar de Rommelmarkt & Garageverkoop Rietedries op 10 mei 2025! Gratis toegang. Bekijk hier meer details!",
-        url: window.location.href
-    }).then(() => {
-        console.log("Succesvol gedeeld!");
-    }).catch(console.error);
+navigator.share({
+    title: "Rommelmarkt & Garageverkoop Rietedries",
+    text: "Kom ook naar de Rommelmarkt & Garageverkoop Rietedries op 10 mei 2025! Gratis toegang. Bekijk hier meer details!",
+    url: window.location.href
+}).then(() => {
+    console.log("Succesvol gedeeld!");
+}).catch(console.error);
 } else {
-    alert("Delen wordt niet ondersteund in deze browser. Gebruik de specifieke knoppen hieronder.");
+alert("Delen wordt niet ondersteund in deze browser. Gebruik de specifieke knoppen hieronder.");
 }
 });
 

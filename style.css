@@ -58,6 +58,7 @@ footer {
     
                 li {
                     width: fit-content;
+                    text-align: start;
     
                     a {
                         color: var(--prim-color);
@@ -89,6 +90,21 @@ footer {
         h2 {
             margin-top: 0;
             color: var(--prim-color);
+        }
+        .Fail {
+            color: orangered;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0;
+            padding-left: 16px;
+            list-style-type: none;
+
+            li::first-letter {
+                text-transform: capitalize;
+            }
         }
     }
     #previous-events {
@@ -142,6 +158,10 @@ footer {
                 border-radius: 4px;
                 border: 1px solid #ddd;
                 box-sizing: border-box; /* Zorgt ervoor dat padding wordt meegerekend in de breedte */
+            }
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
             }
             input,
             select {
@@ -217,7 +237,7 @@ footer {
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*CSS toegevoegd voor de envelop animatie*/
+/*CSS toegevoegd voor de verstuur animatie*/
 /* Knopstijl */
 #submitButton {
     display: flex;
@@ -242,11 +262,6 @@ footer {
     background-color: #d6d6d6;
 }
 
-/* GIF stijl */
-#envelopeGif {
-    max-height: 100%;
-}
-
 /* Bolletjes stijl */
 #loadingDots {
     display: flex;
@@ -261,7 +276,7 @@ footer {
     height: 8px;
     background-color: white;
     border-radius: 50%;
-    animation: bounce 1.2s infinite ease-in-out;
+    animation: bounce 1.5s infinite ease-in-out;
 }
 
 .dot:nth-child(1) {

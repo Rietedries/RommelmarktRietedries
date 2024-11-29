@@ -48,12 +48,12 @@
 </div>
 
 <div class="container">
-    <div class="about" id="about">
-        <h2>Over</h2>
-        <ul class="listAbout">
-            <li>ijskar Elwin</li>
-            <li>Patinnerie stand met gebakjes</li>
-            <li><strong>gratis</strong> schmink voor kinderen</li>
+    <div class="voorzieningen" id="voorzieningen">
+        <h2>Voorzieningen</h2>
+        <ul>
+            <li>Ijskar Elwin</li>
+            <li>Stand met gebakjes - Patinnerie </li>
+            <li><strong>Gratis</strong> schmink voor kinderen</li>
             <li>2 speeltuinen in de wijk</li>
         </ul>
     </div>
@@ -82,11 +82,10 @@
             <input type="email" id="email" name="email" required>
 
             <label for="phone">Telefoonnummer (optioneel):</label>
-            <input type="text" id="phone" name="phone">
+            <input type="number" id="phone" name="phone">
 
             <button id="submitButton" type="submit">
                 <span>Verstuur</span>
-                <img id="envelopeGif" src="./img/ezgif-7-b5dee7f82e.gif" alt="Verstuur animatie" style="display: none;">
                 <div id="loadingDots" style="display: none;">
                     <span class="dot"></span>
                     <span class="dot"></span>
@@ -101,10 +100,13 @@
 </div>
 
 <!-- Nieuwe container voor het succesbericht -->
-<div class="container" id="successMessage" style="display: none;">
-    <div class="success-message">
-        <h2>Bedankt voor je inschrijving!</h2>
-        <p>U kreeg een email van ons met de vraag uw betaling in orde te brengen. Indien u geen email van ons heeft gekregen, contacteer ons dan op het emailadres: veronique.holderbeke@gmail.com</p>
+<div class="container" id="Message" style="display: none;"></div>
+
+<!-- Kaart en locatie -->
+<div class="container">
+    <div class="map" id="map">
+        <h2>Locatie</h2>
+        <iframe src="https://www.google.com/maps/d/u/6/embed?mid=1WCSPx76TgkrwlcWrHqmBs3Hug8-wWnY&ehbc=2E312F" width="100%" height="480"></iframe>
     </div>
 </div>
 
@@ -127,30 +129,6 @@
     </div>
 </div>
 
-<!-- Kaart en locatie -->
-<div class="container">
-    <div class="map" id="map">
-        <h2>Locatie</h2>
-        <iframe src="https://www.google.com/maps/d/u/6/embed?mid=1WCSPx76TgkrwlcWrHqmBs3Hug8-wWnY&ehbc=2E312F" width="100%" height="480"></iframe>
-    </div>
-</div>
-
-<div class="container">
-    <div class="contact-options" id="contact-options">
-        <h2>Contacteer Ons</h2>
-        <div class="contact-icons">
-            <!-- Facebook-link -->
-            <a href="https://www.facebook.com/groups/RieteDriesWondelgem" target="_blank" title="Ga naar de Facebook-groep">
-                <img src="./img/facebook-icoon.png" alt="Facebook" class="contact-icon">
-            </a>
-            <!-- E-mail-link -->
-            <a href="mailto:veronique.holderbeke@gmail.com" title="Stuur een e-mail">
-                <img src="./img/email-icoon.png" alt="E-mail" class="contact-icon">
-            </a>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     <div class="previous-events" id="previous-events">
         <h2>Vorige Events</h2>
@@ -158,7 +136,7 @@
             <button onclick="showPhotos(2024)">2024</button>
             <button onclick="showPhotos(2025)">2025</button>
         </div>
-        <div id="PhotoGallery"></div>
+        <div id="PhotoGallery" style="display: none;"></div>
     </div>
 </div>
 
@@ -178,10 +156,11 @@
             <span>Inhoud</span>
             <ul class="inhoud">
                 <li><a href="#info">Praktische info</a></li>
+                <li><a href="#voorzieningen">Voorzieningen</a></li>
                 <li><a href="#signupButton">Inschrijven</a></li>
                 <li><a href="#map">Locatie</a></li>
-                <li><a href="#contact-options">Contacteer Ons</a></li>
-                <li><a href="#previous-events">Vorige Events</a></li>
+                <li><a href="#shareEvent">Deel dit evenement</a></li>
+                <li><a href="#previous-events">Vorige events</a></li>
             </ul>
         </div>
     </div>
