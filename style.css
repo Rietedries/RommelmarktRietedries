@@ -127,21 +127,15 @@ footer {
                 margin-top: 10px;
             }
         }
-        #year-buttons {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 10px;
-          
-          button {
-              background-color: var(--prim-color);
-              color: white;
-              border: none;
-              padding: 7px 14px;
-              border-radius: 4px;
-              cursor: pointer;
-              width: fit-content;
-          }
+        button {
+            background-color: var(--prim-color);
+            color: white;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: fit-content;
+            margin-right: 10px;
         }
         button:hover {
             background-color: var(--sec-color);
