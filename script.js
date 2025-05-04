@@ -132,7 +132,7 @@ formContainer.style.display = "none";
 
 // Controleer deadline voor inschrijving
 function checkSignupDate() {
-const deadline = new Date("2025-05-03");
+const deadline = new Date("2025-05-10");
 const today = new Date();
 const signupButton = document.getElementById("signupButton");
 
