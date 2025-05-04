@@ -21,6 +21,7 @@ function sendMail() {
         lastname: document.getElementById("lastname").value,
         email: document.getElementById("email").value,
         phone: document.getElementById("phone").value || "Niet opgegeven",
+        numberOfStands: document.getElementById("numberOfStands").value,
     };
 
     emailjs
