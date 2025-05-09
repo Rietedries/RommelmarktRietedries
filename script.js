@@ -1,4 +1,5 @@
 let isProcessing = false;
+const volzet = true; // Zet op true als de markt volzet is
 
 
 function sendMail() {
@@ -148,8 +149,19 @@ signupButton.onclick = function () {
 // Controleer bij laden van de pagina
 window.onload = function () {
 checkSignupDate();
+checkVolzetStatus();
 };
 
+function checkVolzetStatus() {
+    if (volzet) {
+        const signupButton = document.getElementById("signupButton");
+        signupButton.classList.add("disabled");
+        signupButton.innerHTML = "<span>Volzet</span>";
+        signupButton.onclick = function () {
+            alert("Inschrijven is niet meer mogelijk. De markt is volzet.");
+        };
+    }
+}
 
 
 // Functie om de foto's te tonen
