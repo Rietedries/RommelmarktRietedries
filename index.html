@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rommelmarkt Rietedries - 10 mei 2025</title>
+    <title>Rommelmarkt Rietedries - 9 mei 2026</title>
     <link rel="icon" href="./img/gettyimages-2094304497-612x612.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 
     <!-- Test Graph meta tags via https://developers.facebook.com/tools/debug/-->
-    <meta property="og:title" content="Rommelmarkt & Garageverkoop Rietedries - 10 mei 2025" />
-    <meta property="og:description" content="Kom naar de Rommelmarkt en Garageverkoop op 10 mei 2025! Bekijk meer informatie en schrijf je in voor een staanplaats op onze website." />
+    <meta property="og:title" content="Rommelmarkt & Garageverkoop Rietedries - 9 mei 2026" />
+    <meta property="og:description" content="Kom naar de Rommelmarkt en Garageverkoop op 9 mei 2026! Bekijk meer informatie en schrijf je in voor een staanplaats op onze website." />
     <meta property="og:image" content="https://rietedries.github.io/RommelmarktRietedries/img/Footer_icoon.jpg" />
     <meta property="og:url" content="https://rietedries.github.io/RommelmarktRietedries/" />
     <meta property="og:type" content="event" />
@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            emailjs.init("-1n-SVeTxzt6rWTWo"); // Initialiseer EmailJS met de publicKey
+            emailjs.init("HyNKyX8A8vStB_Lff"); // Initialiseer EmailJS met de publicKey
         })();
     </script>
     <script src="script.js"></script>
@@ -31,7 +31,7 @@
 <div class="container">
     <div class="info" id="info">
         <h2>Praktische Info</h2>
-        <p><strong>Datum:</strong> 10/05/2025</p>
+        <p><strong>Datum:</strong> <span id="eventDate" data-date="2026-05-09">09/05/2026</span></p>
         <p><strong>Tijd:</strong> 09:00 - 18:00 (Opstellen vanaf 07:00)</p>
         <p style="display: flex; align-items: baseline; gap: 8px;">
             <strong>Inschrijving:</strong>
@@ -40,7 +40,7 @@
                 Gratis voor wijkbewoners
             </span>
         </p>
-        <p><strong>Deadline voor inschrijving:</strong> 09/05/2025</p>
+        <p><strong>Deadline voor inschrijving:</strong> <span id="signupDeadline" data-date="2026-05-02">02/05/2026</span></p>
         <p><strong>Toegang:</strong> Gratis</p>
         <p><strong>Locatie:</strong> wijk Rietedries, 9032 Wondelgem <a href="https://www.google.com/maps/d/u/6/embed?mid=1WCSPx76TgkrwlcWrHqmBs3Hug8-wWnY&ehbc=2E312F" target="_blank">Bekijk op Google Maps</a></p>     
         <p><strong>Deelnemende straten:</strong> Biesbilkstraat, Holmerestraat, Liefbilkstraat, Bloembilkstraat, Krommebunderstraat & deel van de Fabriekstraat</p>
@@ -70,7 +70,7 @@
 <div class="container" id="inschrijvingsformuliercontainer">
     <div class="signup-form" id="signupForm">
         <h2>Inschrijvingsformulier</h2>
-        <span><strong>Let Op!</strong> Bent u een wijkbewoner? Stuur dan uw <strong>naam, voornaam en adres</strong> naar <strong><a href="mailto:veronique.holderbeke@gmail.com">veronique.holderbeke@gmail.com</a></strong>.</span>
+        <span><strong>Let Op!</strong> Bent u een wijkbewoner? Stuur dan uw <strong>naam, voornaam en adres</strong> naar <strong><a href="mailto:rietedries@gmail.com">rietedries@gmail.com</a></strong>.</span>
         <form id="signupFormElement" action="https://script.google.com/macros/s/AKfycbzFUzpV7kFsD67CF3-9iwtoR6nPdJh46jSB3To2JLNrnRaF5ZDwi-gUMAipJe7e2SUw/exec" method="post"onsubmit="event.preventDefault(); sendMail();">
             <label for="firstname">Voornaam:</label>
             <input type="text" id="firstname" name="firstname" required>
@@ -86,6 +86,18 @@
 
             <label for="numberOfStands">Aantal standen (±6m/stand & €5/stand):</label>
             <input type="number" id="numberOfStands" name="numberOfStands" min="1" value="1" required>
+
+            <label for="remarks">
+                Vragen of opmerkingen (optioneel)
+                <small id="remarksCounter">0 / 500</small>
+            </label>
+            <textarea
+                id="remarks"
+                name="remarks"
+                rows="3"
+                maxlength="500"
+                placeholder="Heb je een vraag of extra info die we moeten weten?"
+            ></textarea>
 
             <button id="submitButton" type="submit">
                 <span>Verstuur</span>
@@ -114,6 +126,18 @@
 </div>
 
 <div class="container">
+    <div class="previous-events" id="previous-events">
+        <h2>Vorige Events</h2>
+        <div class="year-buttons" id="year-buttons">
+            <button onclick="showPhotos(2024)">2024</button>
+            <button onclick="showPhotos(2025)">2025</button>
+            <button onclick="showPhotos(2026)">2026</button>
+        </div>
+        <div id="PhotoGallery" style="display: none;"></div>
+    </div>
+</div>
+
+<div class="container">
     <div class="share-event" id="shareEvent">
         <h2>Deel dit evenement</h2>
         <div class="contact-icons">
@@ -124,22 +148,11 @@
                 <img src="./img/facebook-icoon.png" alt="Facebook Share" class="contact-icon">
             </a>
             <!-- Email Share -->
-            <a href="mailto:?subject=Kom%20naar%20Rommelmarkt%20Rietedries!&body=Hallo,%0D%0A%0D%0AIk%20nodig%20je%20uit%20voor%20de%20Rommelmarkt%20en%20Garageverkoop%20Rietedries%20op%2010%20mei%202025.%0D%0A%0D%0ABekijk%20meer%20informatie%20hier:%20https://rietedries.github.io/RommelmarktRietedries/%0D%0A%0D%0AVriendelijke%20groeten,%0D%0A[Je%20Naam]"
+            <a href="mailto:?subject=Kom%20naar%20Rommelmarkt%20Rietedries!&body=Hallo,%0D%0A%0D%0AIk%20nodig%20je%20uit%20voor%20de%20Rommelmarkt%20en%20Garageverkoop%20Rietedries%20op%209%20mei%202026.%0D%0A%0D%0ABekijk%20meer%20informatie%20hier:%20https://rietedries.github.io/RommelmarktRietedries/%0D%0A%0D%0AVriendelijke%20groeten,%0D%0A[Je%20Naam]"
                 title="Deel via e-mail">
                 <img src="./img/email-icoon.png" alt="Email Share" class="contact-icon">
             </a>
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="previous-events" id="previous-events">
-        <h2>Vorige Events</h2>
-        <div class="year-buttons" id="year-buttons">
-            <button onclick="showPhotos(2024)">2024</button>
-            <button onclick="showPhotos(2025)">2025</button>
-        </div>
-        <div id="PhotoGallery" style="display: none;"></div>
     </div>
 </div>
 
@@ -167,7 +180,7 @@
             </ul>
         </div>
     </div>
-    <span>&copy; 2025 Rommelmarkt Rietedries. Alle rechten voorbehouden.</span>
+    <span>&copy; 2026 Rommelmarkt Rietedries. Alle rechten voorbehouden.</span>
 </footer>
 </body>
 </html>
