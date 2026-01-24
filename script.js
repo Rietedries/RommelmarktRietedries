@@ -1,6 +1,6 @@
 let isProcessing = false;
 const volzet = false; // Zet op true als de markt volzet is
-const inschrijvingenGeopend = false; // Zet op true als inschrijvingen geopend zijn
+const inschrijvingenGeopend = True; // Zet op true als inschrijvingen geopend zijn
 
 
 function sendMail() {
@@ -232,9 +232,10 @@ const photos = {
     './img/2024/Kraam052024.jpg'
 ],
 2025: [
+    './img/2025/Patinnerie.jpg',
+    './img/2025/Biesbilkstraat2.jpg',
     './img/2025/Biesbilkstraat1.jpg',
     './img/2025/IjskarElwin.jpg',
-    './img/2025/Biesbilkstraat2.jpg',
 ]
 };
 
