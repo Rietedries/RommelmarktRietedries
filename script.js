@@ -257,21 +257,6 @@ PhotoGallery.innerHTML = `<span>Nog geen foto's beschikbaar voor ${year}.</span>
 }
 
 
-// Web Share API voor moderne browsers
-document.getElementById("shareButton").addEventListener("click", function () {
-if (navigator.share) {
-navigator.share({
-    title: "Rommelmarkt & Garageverkoop Rietedries",
-    text: "Kom ook naar de Rommelmarkt & Garageverkoop Rietedries op 9 mei 2026! Gratis toegang. Bekijk hier meer details!",
-    url: window.location.href
-}).then(() => {
-    console.log("Succesvol gedeeld!");
-}).catch(console.error);
-} else {
-alert("Delen wordt niet ondersteund in deze browser. Gebruik de specifieke knoppen hieronder.");
-}
-});
-
 // Specifieke deelopties
 const eventUrl = encodeURIComponent(window.location.href);
 const eventTitle = encodeURIComponent("Rommelmarkt & Garageverkoop Rietedries");
@@ -281,7 +266,7 @@ const eventText = encodeURIComponent("Kom ook naar de Rommelmarkt & Garageverkoo
 document.getElementById("facebookShare").href = `https://www.facebook.com/sharer/sharer.php?u=${eventUrl}`;
 
 // WhatsApp
-document.getElementById("whatsappShare").href = `https://api.whatsapp.com/send?text=${eventText}%20${eventUrl}`;
+// document.getElementById("whatsappShare").href = `https://api.whatsapp.com/send?text=${eventText}%20${eventUrl}`;
 
 // E-mail
 document.getElementById("emailShare").href = `mailto:?subject=${eventTitle}&body=${eventText}%20${eventUrl}`;
