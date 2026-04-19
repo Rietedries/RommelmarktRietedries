@@ -1,6 +1,6 @@
 let isProcessing = false;
 const volzet = false; // Zet op true als de markt volzet is
-const inschrijvingenGeopend = True; // Zet op true als inschrijvingen geopend zijn
+const inschrijvingenGeopend = true; // Zet op true als inschrijvingen geopend zijn
 
 
 function sendMail() {
