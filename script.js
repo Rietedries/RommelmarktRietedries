@@ -1,5 +1,5 @@
 let isProcessing = false;
-const volzet = false; // Zet op true als de markt volzet is
+const volzet = true; // Zet op true als de markt volzet is
 const inschrijvingenGeopend = true; // Zet op true als inschrijvingen geopend zijn
 
 
